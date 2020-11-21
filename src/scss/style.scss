@@ -1,0 +1,33 @@
+@import "./custom.scss";
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../../node_modules/bootstrap/scss/_variables.scss";
+@import "../../node_modules/bootstrap/scss/mixins/_box-shadow.scss";
+
+// $fa-font-path: "/assets/iconfonts" !default;
+// @import "../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+// @import "../../node_modules/@fortawesome/fontawesome-free/scss/brands";
+// @import "../../node_modules/@fortawesome/fontawesome-free/scss/solid";
+
+@import "./variables.scss";
+// @import "./modal-side.scss";
+//@import "./modal-zoom.scss";
+@import "./modal.scss";
+// @import "./nav-mixins.scss";
+// @import "./nav-modal.scss";
+//@import "./nav-modal-top.scss";
+//@import "./nav-breadcrumb.scss";
+//@import "./cover-page.scss";
+@import "./carousel.scss";
+//@import "./buttons.scss";
+// @import "./links.scss";
+// @import "./gallery.scss";
+// @import "./gallery-attributes.scss";
+// @import "./footer.scss";
+// @import "./texts.scss";
+// @import "./trigger.scss";
+// @import "./statBar.scss";
+// @import "./jumbotron.scss";
+// @import "./navigation-main";
+body{
+  background: #ddd;
+}

@@ -1,0 +1,65 @@
+.carousel-control-prev,
+.carousel-control-next{
+  font-size: $spacer*1.5;
+  color: $col-carousel-nav-fg;
+  z-index: 20;
+  display: block;
+  position: relative;
+  bottom: auto;
+  @include btnRound($baseNavUnit,#000000,$col-bg-tint-dark);
+  &:hover{
+    opacity: 1;
+  }
+}
+
+body{
+  .carousel-control-prev{
+    margin-top: $baseNavUnit*2;
+  }
+  .carousel-control-next{
+
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next{
+    right: 0;
+    left: auto;
+    opacity: 1;
+    display: block;
+    &:hover{
+      color: $col-carousel-nav-fg;
+      opacity: 0.6;
+    }
+    .fas{
+      color: $col-carousel-nav-fg;
+    }
+  }
+}
+
+.carousel-controls-wrapper{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.carousel-indicators{
+  $indicator_size: $spacer/2;
+  margin: 0;
+  position: absolute;
+  height: $spacer*2;
+  top: -$spacer*3;
+  z-index: 1000;
+  li{
+    box-sizing: border-box;
+    margin: $indicator_size $indicator_size/4;
+    border: solid 1px #000;
+    border-radius: $indicator_size/2;
+    width: $indicator_size;
+    height: $indicator_size;
+    line-height: $indicator_size;
+    opacity: 0.3;
+  }
+  .active{
+    background: #000;
+  }
+}

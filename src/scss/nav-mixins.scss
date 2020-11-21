@@ -1,0 +1,166 @@
+@mixin navWhite{
+  .nav-main-wrapper{
+    background: rgba(0,0,0,0.2);
+    .nav-logo{
+      .nav-logo-img{
+        fill: $white;
+        .st0{
+          fill: #000;
+        }
+      }
+    }
+    //
+    .nav-item{
+      .nav-item-link,
+      .nav-logo-link,
+      .nav-contact
+      {
+        @include textShadowDark;
+        color: $white;
+      }
+
+      .nav-fas:hover{
+        background: rgba(255,255,255,0.1);
+      }
+    }
+  }
+}
+
+@mixin navBlack{
+  .nav-main-wrapper{
+    background: $white;
+
+    .nav-item{
+      .nav-item-link,
+      .nav-logo-link,
+      .nav-contact
+      {
+        text-shadow: none;
+        color: $black;
+      }
+    }
+    //
+    .nav-logo{
+      .nav-logo-img{
+        fill: $black;
+      }
+    }
+  }
+}
+
+@mixin navCrumbBlack{
+  .nav-crumb{
+    color: $black;
+    text-shadow: none;
+  }
+}
+
+@mixin navCrumbWhite{
+  .nav-crumb{
+    color: $white;
+    @include textShadowDark;
+  }
+}
+
+@mixin navPortrait{
+  .nav-main-wrapper{
+    width: 100%;
+    .nav-contact{
+      width: 25%;
+      float: left;
+      text-align: left;
+    }
+    .nav-explore{
+      width: 25%;
+      float: right;
+      text-align: right;
+    }
+    .nav-logo{
+      width: 50%;
+      float: left;
+    }
+  }
+  .has-nav{
+    padding-top: $height-top-nav-total;//show top nav
+  }
+}
+
+@mixin navLandscape{
+
+  .nav-main-wrapper{
+    width: $height-top-nav + ($baseNavUnit*2);
+    height: 100%;
+    right: 0;
+    .nav-item{
+      text-align: center;
+      padding-bottom: $baseNavUnit;
+      height: 33.3333%;
+      width: 100%;
+    }
+    .nav-crumbs{
+      display: none;
+    }
+    .nav-main-container{
+      height: auto;
+      padding: 0;
+    }
+
+  }
+  //
+  .has-nav{
+    padding-top: 0;
+  }
+  body{
+    padding-right: $height-top-nav + ($baseNavUnit*2);
+  }
+
+}
+
+@mixin navM{
+  body{
+    padding-right: 0;
+  }
+  .nav-main-wrapper{
+    width: 100%;
+    height: auto;
+    .nav-item{
+      width: auto;
+    }
+    .nav-contact{
+      text-align: left;
+      float: left;
+      margin-right: $baseNavUnit*2;
+    }
+    .nav-logo{
+      float: left;
+      width: 30%;
+      .nav-logo-img{
+        margin: 0;
+      }
+    }
+    .nav-main .nav-item,
+    .nav-site-caption{
+      float: left;
+      font-family: $brand-font;
+      .nav-item-link{
+        height: $height-top-nav;
+        line-height: $height-top-nav;
+      }
+    }
+
+    .nav-explore{
+      display: none;
+    }
+    #nav-main-top{
+      display: block;
+      float: right;
+      .nav-item{
+        float: left;
+      }
+    }
+
+  }
+  .has-nav{
+    padding-top: $height-top-nav-total;//show top nav
+  }
+}
