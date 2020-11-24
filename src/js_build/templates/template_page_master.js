@@ -1,5 +1,5 @@
 const dochead = require("../partials/head");
-const navbar_main = require("../partials/navbar_main");
+const nav_main = require("../partials/nav_main");
 const footer = require("../partials/footer");
 const paths = require("../paths.js");
 const dirTree = require("directory-tree");
@@ -34,7 +34,7 @@ function template_home(data){
 return `
 ${dochead(data)}
 <body class="page-basic ${data.config.body_class ? data.config.body_class : ''}" data-tpb="${data.pageContentUrl}">
-  ${navbar_main(data,menuData)}
+  ${nav_main(data,menuData)}
   <div class="container content">${data.body}</div>
   ${footer(data)}
   <script>

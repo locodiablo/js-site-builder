@@ -1,6 +1,6 @@
-const vars = require("../vars.js");
+const defaults = require("../defaults.js")
+const vars = require("../vars.js")
 var today = new Date();
-// considered fonts: ['Alfa Slab One','Cairo','Poppins','Teko','Ubuntu','Russo One']
 
 function head(data){
 const head = data.head;
@@ -8,14 +8,14 @@ const head = data.head;
   <!doctype html>
   <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
   <head>
-    <title>${data.head.title} - ${vars.site_name}</title>
+    <title>${data.head.title} - ${defaults.site_name}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="${head.title}">
     <meta property="og:description" content="${head.hasOwnProperty('description') ? head.description : ''}">
     <meta property="og:url" content="">
-    <meta property="og:site_name" content="${vars.site_name}">
+    <meta property="og:site_name" content="${defaults.site_name}">
     <meta property="og:locale" content="en_GB">
     <meta property="og:image" content="">
     <meta property="og:updated_time" content="${today.toISOString()}">
@@ -26,12 +26,12 @@ const head = data.head;
     <meta property="og:type" content="website">
     <meta property="og:title" content="${head.title}">
     <meta property="og:url" content="">
-    <meta property="og:site_name" content="${vars.site_name}">
+    <meta property="og:site_name" content="${defaults.site_name}">
     <meta property="og:locale" content="en_GB">
     <meta name="twitter:card" content="">
     <meta name="twitter:title" content="${head.title}">
 
-    <link rel="canonical" href="https://${vars.site_url}${data.pageContentUrl}" />
+    <link rel="canonical" href="https://${defaults.site_url}${data.pageContentUrl}" />
     <link rel="icon" href="/assets/images/brand/favicon-32x32.png" type="image/png" />
     <link rel="shortcut icon" href="/favicon.ico" />
 
@@ -42,11 +42,11 @@ const head = data.head;
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "url": "http://www.sjrollett.com",
-      "name": "S.J.Rollett, Lead Designer",
+      "url": "${defaults.site_name}",
+      "name": "${defaults.site_name}",
       "contactPoint": {
         "@type": "ContactPoint",
-        "email": "${vars.site_email}",
+        "email": "${defaults.site_email}",
         "contactType": "Enquiries"
       }
     }

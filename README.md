@@ -1,9 +1,9 @@
-# Introdunction
+# Introduction
 JavaScript based website builder, generating HTML files from:
 
-- Source files
-- Templates
-- Data
+- Source JS files
+- JS Templates
+- JS and JSON Data
 
 ## Build
 1. Content is defined by an object exported from each ```index.js``` file in the ```/src/js_build/page_definitions/``` directory, for example:

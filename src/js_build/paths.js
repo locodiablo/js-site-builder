@@ -4,7 +4,8 @@ const paths = {
   publicDir: "./public",
   templatesDir: "../src/js_build/templates",
   definitionsDir: "src/js_build/page_definitions",
-  imagesDir: "./src/assets/images"
+  imagesDir: "./src/assets/images",
+  urlHome: "/"
 }
 
 module.exports = paths;

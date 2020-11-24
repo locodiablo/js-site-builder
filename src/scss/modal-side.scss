@@ -64,11 +64,11 @@
   .modal-side{
     .modal{
       .modal-dialog {
-        width: 400px;
+        width: $width-modal-nav-max;
       }
       &.fade{
         .modal-dialog {
-          right: -400px;
+          right: -($width-modal-nav-max);
         }
       }
     }

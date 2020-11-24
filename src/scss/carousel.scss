@@ -1,12 +1,12 @@
 .carousel-control-prev,
 .carousel-control-next{
-  font-size: $spacer*1.5;
-  color: $col-carousel-nav-fg;
+  // font-size: $spacer*1.5;
+  // color: $col-carousel-nav-fg;
   z-index: 20;
   display: block;
   position: relative;
   bottom: auto;
-  @include btnRound($baseNavUnit,#000000,$col-bg-tint-dark);
+  //@include btnRound($baseNavUnit,#000000,$col-bg-tint-dark);
   &:hover{
     opacity: 1;
   }
@@ -14,7 +14,7 @@
 
 body{
   .carousel-control-prev{
-    margin-top: $baseNavUnit*2;
+    //margin-top: $baseNavUnit*2;
   }
   .carousel-control-next{
 
