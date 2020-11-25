@@ -5,12 +5,14 @@ JavaScript based website builder, generating HTML files from:
 - JS Templates
 - JS and JSON Data
 
+*Navigation* uses Bootstrap carousel modal to enable nested exploration on all screen sizes
+
 ## Build
 1. Content is defined by an object exported from each ```index.js``` file in the ```/src/js_build/page_definitions/``` directory, for example:
 ```
 const page_content = {
         config: {
-                html_template: "template_page_jumbotron",
+                html_template: "template_page_master",
                 nav_text: "Contact",
                 body_class: "optional-class-here another-test-class"
         },

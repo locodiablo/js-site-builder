@@ -2,7 +2,7 @@ const defaults = require("../defaults.js")
 
 const content = {
   config: {
-    html_template: "template_page_master",
+    html_template: "template_page_home",
     nav_text: "Questions",
     body_class: "demo-questions"
   },
@@ -11,7 +11,8 @@ const content = {
     description: `Welcome to the ${defaults.site_name_full} website: Start your insurance quote here!`
   },
   body: [
-    "questions here"
+    "questions here",
+    "other stuff here"
   ],
   footer: []
 };

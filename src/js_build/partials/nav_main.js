@@ -1,4 +1,5 @@
-const vars = require("../vars.js");
+//const vars = require("../vars.js");
+const defaults = require("../defaults.js");
 const paths = require("../paths.js");
 const nav_breadcrumb = require("../partials/nav_breadcrumb.js");
 const dirTree = require("directory-tree");
@@ -41,7 +42,7 @@ menuData.map((eachItem,index) => navTreeSplit[eachItem.type](eachItem)).join("")
 function navbar(data,incomingMenuData){return `
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="${paths.urlHome}">${vars.site_name_full}</a>
+      <a class="navbar-brand" href="${paths.urlHome}">${defaults.site_name_full}</a>
 
       <span class="navbar-toggler j-main-menu" aria-controls="" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

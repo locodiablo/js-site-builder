@@ -22,7 +22,7 @@
   }
 }
 
-.top-modal-class{
+.modal-top{
 
   .nav-contact{
     display: none;
@@ -65,7 +65,7 @@
 
   @include media-breakpoint-up(md){
 
-    .top-modal-class{
+    .modal-top{
       .modal-dialog{
         .modal-content{
           .modal-header-inner{

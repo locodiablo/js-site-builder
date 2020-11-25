@@ -18,8 +18,9 @@ const modal_side_class = "modal-side"
 const modal_nav_class = "modal-nav"
 const modal_demo_class = "modal-demo"
 const classScrollActive = 'scrollActive'
-const classNavBackDefaults = "nav-item nav-back"//nav-item nav-back disabled j-back
+const classNavBackDefaults = "list-group-item nav-back"//nav-item nav-back disabled j-back
 const classNavMain = ".nav-main-wrapper"
+const classNavItem = "nav-list-group"
 const scroll_min = 40
 const classNavTabActive = "nav-t-active"
 let scroll_top = 0
@@ -79,12 +80,10 @@ const templates = {
       const navUrl = incomingLinkData.data.path.replace("src/js_build/page_definitions","")
       incomingLinkData.data.children.length > 1 ? incomingLinkData.exploreClass = 'j-menu ' : ''
       return `
-      <div class="nav-item nav-dir nav-item-${incomingLinkData.thisLinkCount}" data-href="${navUrl}">
-        <a class="nav-item-link ${incomingLinkData.exploreClass}" data-my-menu="${incomingLinkData.thisLinkCount}" href="${navUrl}">
+      <a class="list-group-item ${incomingLinkData.exploreClass} nav-dir list-group-item-${incomingLinkData.thisLinkCount}" data-my-menu="${incomingLinkData.thisLinkCount}" href="${navUrl}" data-href="${navUrl}">
           ${incomingLinkData.data.pageData.text}
           ${incomingLinkData.data.children.length > 1 ? '<i class="nav-fas fas fa-angle-right"></i>' : ''}
-        </a>
-      </div>
+      </a>
       `
     },
     file: function(incomingLinkData){
@@ -93,38 +92,30 @@ const templates = {
   },
   sideNavCarousel: function(data){
     return `
-    <div class="row m-0 nav-main-controls">
-      <div class="nav-item nav-back disabled j-back">
-        <div class="nav-item-link" aria-label="back link">
+    <div class="list-group ${classNavItem}">
+      <div class="list-group-item nav-back disabled j-back" aria-label="back link">
           <i class="nav-fas btn-round btn-tint-dark fas fa-angle-left"></i> Back
-        </div>
-      </div>
-      <div class="nav-item nav-contact">
-        <a href="/about/contact/" class="nav-item-link">
-          <span class="nav-fas btn-round btn-tint-dark btn-round-split-x">
-            <div class="btn-round-split fas fa-envelope"></div>
-            <div class="btn-round-split fas fa-phone"></div>
-          </span>
-        </a>
       </div>
     </div>
     <div id="nav_carousel" class="carousel slide nav_carousel" data-ride="false" data-interval="false">
       <div class="carousel-inner">
         <div class="carousel-item item-0 active">
-          ${data.map((navItem,index) => {
-            let linkData = {
-              data: navItem,
-              thisLinkCount: index
-            }
-            return templates.sideNavTypes[navItem.type](linkData)
-          }).join("")}
+          <div class="list-group ${classNavItem}">
+            ${data.map((navItem,index) => {
+              let linkData = {
+                data: navItem,
+                thisLinkCount: index
+              }
+              return templates.sideNavTypes[navItem.type](linkData)
+            }).join("")}
+          </div>
         </div>
       </div>
     </div>
     `
   },
   topNavCarousel: function(data){
-    return `<div class='container'>${data}</div>`
+    return `<div class='container p-0'>${data}</div>`
   }
 }
 
@@ -177,53 +168,7 @@ const toggleContact = {
     $(".contact-actions").addClass("d-none")
   }
 }
-
-const setLight = {
-  am: function(data){
-    let trans = data/100
-    $(".j-midnightFade").css("opacity",1-(trans*2))
-    $(".cover-img-0").css("opacity",0.75+(trans/2))
-  },
-  pm: function(data){
-    let trans = data/100
-    $(".j-midnightFade").css("opacity",((trans-.5)*2))
-    $(".cover-img-0").css("opacity",1.25-(trans/2))
-  }
-}
-
-function splitTime(data){
-  data < 50 ? setLight.am(data) : setLight.pm(data)
-}
-
-let theTime = ''
-
-function getTime(){
-  const t = new Date()
-  const h = t.getHours()
-  let m = t.getMinutes()
-  m < 10 ? m = '0' + m : m = m
-  theTime = "" + h + m
-  theTime = Number(theTime)/24
-  splitTime(theTime)
-  $(".j-toggle-cover").val(theTime)
-}
-
-function startDay(){
-  getTime()
-    setInterval(function () {
-        getTime()
-    }, 5000);
-}
-
 $(document).ready(function ($) {
-
-  if($("#j-midnightFade").length){
-    startDay();
-    var slider = document.getElementById("j-toggle-cover")
-    slider.oninput = function() {
-      splitTime(this.value)
-    }
-  }
 
   // open mobile nav
   $(document).on("click", ".j-main-menu", function(e){
@@ -246,7 +191,7 @@ $(document).ready(function ($) {
     renderModalNav({
       modalTitle: `${$(this).text()}`,
       modalBody: templates.topNavCarousel(templates.sideNavCarousel(menuData[thisLinkLevel].children)),
-      bodyClass: `top-modal-class`,
+      bodyClass: `modal-top`,
       navTabIndex: thisLinkLevel
     });
   });
@@ -285,7 +230,7 @@ $(document).ready(function ($) {
   })
 
   $(id_modal).bind("hidden.bs.modal", function(e) {
-      $("body").removeClass("top-modal-class")
+      $("body").removeClass("modal-top")
       resetModalNav()
   });
 
@@ -300,7 +245,6 @@ $(document).ready(function ($) {
 
 $(document).on("slid.bs.carousel",nav_carousel_id,function(e){
   currentIndex = $(nav_carousel_id + ' div.active').index()
-  //console.log('currentIndex',currentIndex)
   $(`${nav_carousel_id} .item-${currentIndex+1}`).remove()
   navCarouselActive()
 });

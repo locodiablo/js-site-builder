@@ -23,7 +23,7 @@ function nav_breadcrumb(data){
   let url = "/";
   return `
   <div class="breadcrumb-container">
-    <nav class="container" aria-label="breadcrumb">
+    <nav class="container p-0" aria-label="breadcrumb">
       <ol class="breadcrumb">
         ${crumbs.default({
           url: paths.urlHome,

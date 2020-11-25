@@ -1,6 +1,6 @@
 const content = {
   config: {
-    html_template: "template_page_master",
+    html_template: "template_page_banner",
     nav_text: "About",
     body_class: ""
   },

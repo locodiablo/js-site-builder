@@ -35,7 +35,7 @@ return `
 ${dochead(data)}
 <body class="page-basic ${data.config.body_class ? data.config.body_class : ''}" data-tpb="${data.pageContentUrl}">
   ${nav_main(data,menuData)}
-  <div class="container content">${data.body}</div>
+  ${data.body}
   ${footer(data)}
   <script>
     const menuData = ${JSON.stringify(menuData)}

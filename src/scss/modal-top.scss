@@ -1,0 +1,40 @@
+.modal-top{
+
+  .modal,
+  .modal-backdrop{
+    top: $modal-top;
+    padding-bottom: $modal-top;
+  }
+
+  .modal-dialog{
+    max-width: none;
+    margin: 0 auto;
+    background: $modal-top-bg;
+    .modal-content{
+      border-radius: 0;
+      border: none;
+      width: 100%;
+      background: transparent;
+
+      .modal-header{
+        background: transparent;
+        padding-right: $grid-gutter-width/2;
+        .modal-title{
+          text-align: left;
+        }
+      }
+
+      .modal-body{
+        padding: 0;
+      }
+
+    }
+    .modal-footer{
+      display: none;
+    }
+  }
+}
+
+@include media-breakpoint-up(md){
+
+}
