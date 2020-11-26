@@ -40,7 +40,7 @@ const navOutputSplit = {
 menuData.map((eachItem,index) => navTreeSplit[eachItem.type](eachItem)).join("")
 
 function navbar(data,incomingMenuData){return `
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-sm bg-light">
     <div class="container">
       <a class="navbar-brand" href="${paths.urlHome}">${defaults.site_name_full}</a>
 

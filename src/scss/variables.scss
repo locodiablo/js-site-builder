@@ -1,4 +1,4 @@
-$opacityDisabled: 0.3;
+$opacity_disabled: 0.3;
 //
 $default-font: Helvetica,Arial,sans-serif;
 //$brand-font: 'Homenaje', $default-font;//Bungee, Economica, Saira Extra Condensed, Do Hyeon, Nixie One, Homenaje, Darker Grotesque, Nova Square, Big Shoulders Display
@@ -9,3 +9,5 @@ $width-modal-nav-max: 10rem;
 $modal-top: 3.5rem;
 $modal-top-bg: rgba(255,255,255,0.9);
 $gutter: $grid-gutter-width/2;
+
+$clr-nav-item-border: $modal-header-border-color;

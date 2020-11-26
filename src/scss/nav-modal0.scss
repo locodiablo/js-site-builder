@@ -9,7 +9,7 @@
     .nav-back{
       &.disabled{
         .nav-item-link{
-          opacity: $opacityDisabled;
+          opacity: $opacity_disabled;
           cursor: default;
           &:hover{
             background: transparent !important;

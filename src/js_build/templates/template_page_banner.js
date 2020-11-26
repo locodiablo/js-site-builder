@@ -4,7 +4,8 @@ function template(data){
   data.body = `
     <div class="jumbotron">
       <div class="container">
-        <h1>${data.head.title}</h1>
+        <h1><a href="${data.pageContentUrl}">${data.head.title}</a></h1>
+        <p>${data.head.description}</p>
       </div>
     </div>
     <div class="container">
