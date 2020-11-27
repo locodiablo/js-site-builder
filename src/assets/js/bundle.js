@@ -14,6 +14,7 @@
 
 const id_modal = "#myModal"
 const id_cover_bg = ".jumbotron-cover"
+const id_top_nav_desc = "topNavDesc"
 const modal_side_class = "modal-side"
 const modal_nav_class = "modal-nav"
 const modal_demo_class = "modal-demo"
@@ -50,7 +51,6 @@ function navCarouselActive(){
 
 function clearModalOnClose(){
   $(id_modal).attr("class", "modal fade")
-  $(id_modal + " .modal-body").removeClass("pad-0")
   $(id_modal + " .modal-body").html("")
   $(id_modal + " .modal-footer").html("")
   $(id_modal).data('bs.modal',null)
@@ -65,6 +65,10 @@ function resetModalNav(){
   navCarouselActive()
   clearModalOnClose()
   $(`.nav-item-${lastActiveNav}`).removeClass(classNavTabActive)
+}
+
+function setModalNavMenuDesc(data){
+  $(`#${id_top_nav_desc}`).html(data)
 }
 
 const templates = {
@@ -115,7 +119,15 @@ const templates = {
     `
   },
   topNavCarousel: function(data){
-    return `<div class='container p-0'>${data}</div>`
+    return `
+    <div class='container p-0'>
+      <div class="row align-items-center">
+        <div class="col-12 col-sm-6" id="${id_top_nav_desc}"></div>
+        <div class="col-12 col-sm-6">
+          ${data}
+        </div>
+      </div>
+    </div>`
   }
 }
 
@@ -193,15 +205,16 @@ $(document).ready(function ($) {
       modalBody: templates.topNavCarousel(templates.sideNavCarousel(menuData[thisLinkLevel].children)),
       bodyClass: `modal-top`,
       navTabIndex: thisLinkLevel
-    });
-  });
+    })
+    setModalNavMenuDesc(menuData[thisLinkLevel].pageData.description)
+  })
 
   // Navigate through menu carousel
   $(document).on("click", ".j-menu", function(e){
     e.preventDefault();
     let lastIndex2 = arrayOfMenuGroups.length-1
     const thisLinkLevel = `${$(this).data("my-menu")}`
-    console.log(arrayOfMenuGroups[lastIndex2][thisLinkLevel].pageData.text)
+    setModalNavMenuDesc(arrayOfMenuGroups[lastIndex2][thisLinkLevel].pageData.description)
     arrayOfMenuGroups.push(arrayOfMenuGroups[lastIndex2][thisLinkLevel].children)
     goToCarouselNavMenu(thisLinkLevel)
   });

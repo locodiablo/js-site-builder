@@ -14,7 +14,10 @@ const vars = {
   site_email: `simon@${site_domain}`,
   site_domain: site_domain,
   site_cv_caption: "Web and brand creative",
-  buildDate: `${leadingZero(today.getHours())}${leadingZero(today.getMinutes())}-${leadingZero(today.getDate())}${months[today.getMonth()].substring(0,3).toUpperCase()}${today.getFullYear()}`
+  buildDate: `${leadingZero(today.getHours())}${leadingZero(today.getMinutes())}-${leadingZero(today.getDate())}${months[today.getMonth()].substring(0,3).toUpperCase()}${today.getFullYear()}`,
+  date: {
+    year: today.getFullYear()
+  }
 }
 
 module.exports = vars;

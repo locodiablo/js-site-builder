@@ -41,7 +41,7 @@ menuData.map((eachItem,index) => navTreeSplit[eachItem.type](eachItem)).join("")
 
 function navbar(data,incomingMenuData){return `
   <nav class="navbar navbar-expand-sm bg-light">
-    <div class="container">
+    <div class="container p-0">
       <a class="navbar-brand" href="${paths.urlHome}">${defaults.site_name_full}</a>
 
       <span class="navbar-toggler j-main-menu" aria-controls="" aria-expanded="false" aria-label="Toggle navigation">
