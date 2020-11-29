@@ -2,7 +2,7 @@
 
 const id_modal = "#myModal"
 const id_cover_bg = ".jumbotron-cover"
-const id_top_nav_desc = "topNavDesc"
+const id_top_nav_desc = "j-topNavDesc"
 const modal_side_class = "modal-side"
 const modal_nav_class = "modal-nav"
 const modal_demo_class = "modal-demo"
@@ -17,7 +17,6 @@ const transition_interval = 1200
 const nav_carousel_id = ".nav_carousel"
 const idNavBack = ".nav-back"
 let clickedNavIndex = []
-let arrayOfMenuGroups = []
 let currentIndex = 0
 let classBody = ''
 let lastActiveNav = 0
@@ -49,21 +48,30 @@ function clearModalOnClose(){
 function resetModalNav(){
   currentIndex = 0;
   clickedNavIndex = []
-  arrayOfMenuGroups = []
   navCarouselActive()
   clearModalOnClose()
   $(`.nav-item-${lastActiveNav}`).removeClass(classNavTabActive)
 }
 
-function setModalNavMenuDesc(data){
-  $(`#${id_top_nav_desc}`).html(data)
-}
-
 const templates = {
-  sideNavSlide: function(data){
+  aside: function(data){
     return `
-    <div class="carousel-item item-${data.count}">
-      ${data.content}
+      <h3>${data.title}</h3>
+      <p>${data.description}</p>
+    `
+  },
+  navCarouselItem: function(data){
+    return `
+    <div class="carousel-item item-${data.carouselItemIndex} ${data.carouselItemIndex == 0 ? 'active' : ''}">
+        <div class="row align-items-center">
+          <div class="d-none d-sm-block col-sm-6 ${id_top_nav_desc}">
+            ${data.aside}
+          </div>
+          <div class="col-12 col-sm-6">
+            <div class="list-group ${classNavItem}">
+              ${data.links}
+            </div>
+          </div>
     </div>
     `
   },
@@ -78,44 +86,42 @@ const templates = {
       </a>
       `
     },
-    file: function(incomingLinkData){
-      // do nothing
-    }
+    file: function(incomingLinkData){}
   },
-  sideNavCarousel: function(data){
+  navCarousel: function(data){
+    //console.log('navCarousel data',data)
     return `
-    <div class="list-group ${classNavItem}">
-      <div class="list-group-item nav-back disabled j-back" aria-label="back link">
-          <i class="nav-fas btn-round btn-tint-dark fas fa-angle-left"></i> Back
-      </div>
-    </div>
-    <div id="nav_carousel" class="carousel slide nav_carousel" data-ride="false" data-interval="false">
-      <div class="carousel-inner">
-        <div class="carousel-item item-0 active">
+    <div class='container p-0'>
+      <div class="row justify-content-end">
+        <div class="col col-12 col-sm-6">
           <div class="list-group ${classNavItem}">
-            ${data.map((navItem,index) => {
-              let linkData = {
-                data: navItem,
-                thisLinkCount: index
-              }
-              return templates.sideNavTypes[navItem.type](linkData)
-            }).join("")}
+            <div class="list-group-item nav-back disabled j-back" aria-label="back link">
+                <i class="nav-fas btn-round btn-tint-dark fas fa-angle-left"></i> Back
+            </div>
           </div>
+        </div>
+      </div>
+
+      <div id="nav_carousel" class="carousel slide nav_carousel" data-ride="false" data-interval="false">
+        <div class="carousel-inner">
+          ${
+            templates.navCarouselItem(
+              {
+                carouselItemIndex: currentIndex,
+                aside: data.aside,
+                links: data.links.map((navItem,index) => {
+                  let linkData = {
+                    data: navItem,
+                    thisLinkCount: index
+                  }
+                  return templates.sideNavTypes[navItem.type](linkData)
+                }).join("")
+              }
+            )}
         </div>
       </div>
     </div>
     `
-  },
-  topNavCarousel: function(data){
-    return `
-    <div class='container p-0'>
-      <div class="row align-items-center">
-        <div class="col-12 col-sm-6" id="${id_top_nav_desc}"></div>
-        <div class="col-12 col-sm-6">
-          ${data}
-        </div>
-      </div>
-    </div>`
   }
 }
 
@@ -137,110 +143,92 @@ function renderModalNav(data){
   do_modal(modal_data)
 }
 
+function returnLastMenuData(data){
+  let menuDataToUse = data
+  clickedNavIndex.map(eachNavObjectIndex => {
+    menuDataToUse = menuDataToUse[eachNavObjectIndex].children
+  }).join("")
+  return menuDataToUse
+}
+
 function goToCarouselNavMenu(incomingLinkLevel){
-  let lastIndex = arrayOfMenuGroups.length-1
-  $(`${nav_carousel_id} .carousel-inner`).append(templates.sideNavSlide({
-    count: currentIndex+1,
-    content: arrayOfMenuGroups[lastIndex].map((eachLink,index) => {
-      let linkData = {
-        data: eachLink,
-        thisLinkCount: index,
-        navLevel: index
-      }
-      return templates.sideNavTypes[eachLink.type](linkData)
-    }).join('')
+
+  $(`${nav_carousel_id} .carousel-inner`).append(
+    templates.navCarouselItem({
+      carouselItemIndex: currentIndex+1,
+      aside: templates.aside({
+        title: returnLastMenuData(menuData)[incomingLinkLevel].pageData.text,
+        description: returnLastMenuData(menuData)[incomingLinkLevel].pageData.description
+      }),
+      links: returnLastMenuData(menuData).map((navItem,index) => {
+        let linkData = {
+          data: navItem,
+          thisLinkCount: index
+        }
+        return templates.sideNavTypes[navItem.type](linkData)
+      }).join("")
   }))
-  //console.log('lastIndex',lastIndex,arrayOfMenuGroups[lastIndex])
   $(nav_carousel_id).carousel(currentIndex+1)
 }
 
-function isMobileDevice() {
-  return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)
-}
-
-const toggleContact = {
-  mobtrue: function(data){
-    $(".contact-info").addClass("d-none")
-    $(".contact-actions").removeClass("d-none")
-  },
-  mobfalse: function(data){
-    $(".contact-info").removeClass("d-none")
-    $(".contact-actions").addClass("d-none")
-  }
-}
 $(document).ready(function ($) {
 
   // open mobile nav
   $(document).on("click", ".j-main-menu", function(e){
     resetModalNav()
-    arrayOfMenuGroups.push(menuData)
     renderModalNav({
       modalTitle: "Explore",
-      modalBody: templates.sideNavCarousel(arrayOfMenuGroups[0]),
+      modalBody: templates.navCarousel({
+        aside: '',
+        links: menuData
+      }),
       bodyClass: `${modal_side_class} ${modal_nav_class}`
-    });
-  });
+    })
+  })
 
   // open topnav menu
   $(document).on("click", ".j-t-menu", function(e){
     e.preventDefault()
     resetModalNav()
-    const thisLinkLevel = `${$(this).data("my-menu")}`
-    arrayOfMenuGroups.push(menuData)
-    arrayOfMenuGroups.push(menuData[thisLinkLevel].children)
+    const thisLinkLevel = Number(`${$(this).data("my-menu")}`)
+    clickedNavIndex.push(thisLinkLevel)
     renderModalNav({
       modalTitle: `${$(this).text()}`,
-      modalBody: templates.topNavCarousel(templates.sideNavCarousel(menuData[thisLinkLevel].children)),
+      modalBody: templates.navCarousel({
+        aside: menuData[thisLinkLevel].pageData.description,
+        links: menuData[thisLinkLevel].children
+      }),
       bodyClass: `modal-top`,
       navTabIndex: thisLinkLevel
     })
-    setModalNavMenuDesc(menuData[thisLinkLevel].pageData.description)
   })
 
   // Navigate through menu carousel
   $(document).on("click", ".j-menu", function(e){
     e.preventDefault();
-    let lastIndex2 = arrayOfMenuGroups.length-1
-    const thisLinkLevel = `${$(this).data("my-menu")}`
-    setModalNavMenuDesc(arrayOfMenuGroups[lastIndex2][thisLinkLevel].pageData.description)
-    arrayOfMenuGroups.push(arrayOfMenuGroups[lastIndex2][thisLinkLevel].children)
+    const thisLinkLevel = Number(`${$(this).data("my-menu")}`)
+    $(`${id_modal} .modal-title`).text(returnLastMenuData(menuData)[thisLinkLevel].pageData.text)
+    clickedNavIndex.push(thisLinkLevel)
+
     goToCarouselNavMenu(thisLinkLevel)
   });
 
   $(document).on("click", ".j-nav-back", function(e){
     $(nav_carousel_id).carousel(currentIndex-1)
-    arrayOfMenuGroups.pop()
-    let lastIndex2 = arrayOfMenuGroups.length-1
-  });
 
-  $(".j-toggle-content").click(function(e) {
-    let thisCount = $(this).attr("data-count");
-    $(`.timeSlot-${thisCount}`).toggleClass("active");
-    $(`.timeSlot-${thisCount} .trigger-wrapper .fas`).toggleClass("fa-plus")
-    $(`.timeSlot-${thisCount} .trigger-wrapper .fas`).toggleClass("fa-minus")
-  });
-
-  $(".j-ui-demo-v1").click(function(e){
-    const data = {
-      title: "UI Demo v1",
-      body: "demo code here",
-      class: modal_demo_class,
-      backdrop: true
-    }
-    do_modal(data)
+    //$(`${id_modal} .modal-title`).text(returnLastMenuData(menuData).pageData.text)
+    clickedNavIndex.pop()
   })
 
   $(id_modal).bind("hidden.bs.modal", function(e) {
       $("body").removeClass("modal-top")
       resetModalNav()
-  });
+  })
 
   var checkScrollBar = function(){
       $(this).scrollTop() > 1 ?
       $("body").addClass(classScrollActive) : $("body").removeClass(classScrollActive)
   }
-
-  toggleContact[`mob${isMobileDevice()}`]()
 
 });
 
