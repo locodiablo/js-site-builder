@@ -5,23 +5,22 @@
   }
 }
 .modal{
-  .modal-body{
-    .nav-back{
-      &.disabled{
-        .nav-item-link{
-          opacity: $opacity_disabled;
-          cursor: default;
-          &:hover{
-            background: transparent !important;
-          }
+  .nav-back{
+    color: $primary;
+    &.disabled{
+      //.nav-item-link{
+        opacity: $opacity_disabled;
+        cursor: default;
+        &:hover{
+          background: transparent !important;
         }
-      }
-      .fas{
-        margin-right: $spacer/2;
-      }
-      .nav-item-link{
-        cursor: pointer;
-      }
+      //}
+    }
+    .fas{
+      margin-right: $spacer/2;
+    }
+    .nav-item-link{
+      cursor: pointer;
     }
   }
 }

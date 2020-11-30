@@ -1,7 +1,22 @@
 .nav-back{
-  border: none;
+  color: $primary;
   cursor: pointer;
-  border-radius: 0;
+  &.disabled{
+    color: $black;
+    //.nav-item-link{
+      opacity: $opacity_disabled;
+      cursor: default;
+      &:hover{
+        background: transparent !important;
+      }
+    //}
+  }
+  .fas{
+    margin-right: $spacer/2;
+  }
+  .nav-item-link{
+    cursor: pointer;
+  }
 }
 
 .nav_carousel{

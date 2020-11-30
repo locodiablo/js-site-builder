@@ -19,7 +19,7 @@ const modal_side_class = "modal-side"
 const modal_nav_class = "modal-nav"
 const modal_demo_class = "modal-demo"
 const classScrollActive = 'scrollActive'
-const classNavBackDefaults = "list-group-item nav-back"//nav-item nav-back disabled j-back
+const classNavBackDefaults = "nav-back"//nav-item nav-back disabled j-back
 const classNavMain = ".nav-main-wrapper"
 const classNavItem = "nav-list-group"
 const scroll_min = 40
@@ -66,21 +66,19 @@ function resetModalNav(){
 }
 
 const templates = {
-  aside: function(data){
-    return `
-      <h3>${data.title}</h3>
-      <p>${data.description}</p>
-    `
-  },
   navCarouselItem: function(data){
     return `
     <div class="carousel-item item-${data.carouselItemIndex} ${data.carouselItemIndex == 0 ? 'active' : ''}">
         <div class="row align-items-center">
           <div class="d-none d-sm-block col-sm-6 ${id_top_nav_desc}">
-            ${data.aside}
+            ${data.parentData.description}
           </div>
           <div class="col-12 col-sm-6">
             <div class="list-group ${classNavItem}">
+              ${data.parentData.href ?
+                `<a class="list-group-item h3 m-0" href="${data.parentData.href}">${data.parentData.text}</a>`:
+                `<div class="list-group-item h3 m-0">${data.parentData.text}</div>`
+              }
               ${data.links}
             </div>
           </div>
@@ -100,17 +98,24 @@ const templates = {
     },
     file: function(incomingLinkData){}
   },
+  linkBack: `
+      <div class="nav-back disabled j-back" aria-label="back link">
+          <i class="nav-fas btn-round btn-tint-dark fas fa-angle-left"></i> Back
+      </div>
+  `,
+  linkBackORIGINAL: `
+    <div class="-list-group ${classNavItem}">
+      <div class="-list-group-item nav-back disabled j-back" aria-label="back link">
+          <i class="nav-fas btn-round btn-tint-dark fas fa-angle-left"></i> Back
+      </div>
+    </div>
+  `,
   navCarousel: function(data){
-    //console.log('navCarousel data',data)
     return `
     <div class='container p-0'>
-      <div class="row justify-content-end">
+      <div class="row justify-content-end d-none">
         <div class="col col-12 col-sm-6">
-          <div class="list-group ${classNavItem}">
-            <div class="list-group-item nav-back disabled j-back" aria-label="back link">
-                <i class="nav-fas btn-round btn-tint-dark fas fa-angle-left"></i> Back
-            </div>
-          </div>
+            ${templates.linkBack}
         </div>
       </div>
 
@@ -120,7 +125,7 @@ const templates = {
             templates.navCarouselItem(
               {
                 carouselItemIndex: currentIndex,
-                aside: data.aside,
+                parentData: data.parentData,
                 links: data.links.map((navItem,index) => {
                   let linkData = {
                     data: navItem,
@@ -163,19 +168,16 @@ function returnLastMenuData(data){
   return menuDataToUse
 }
 
+// moves nav carousel to next link group,
+// based on last clicked link index
 function goToCarouselNavMenu(data){
+
+  console.log(169,data)
 
   $(`${nav_carousel_id} .carousel-inner`).append(
     templates.navCarouselItem({
       carouselItemIndex: currentIndex+1,
-      // aside: templates.aside({
-      //   title: returnLastMenuData(menuData)[incomingLinkLevel].pageData.text,
-      //   description: returnLastMenuData(menuData)[incomingLinkLevel].pageData.description
-      // }),
-      aside: templates.aside({
-        title: data.parentTitle,
-        description: data.parentDescription
-      }),
+      parentData: data.parentData,
       links: returnLastMenuData(menuData).map((navItem,index) => {
         let linkData = {
           data: navItem,
@@ -193,9 +195,12 @@ $(document).ready(function ($) {
   $(document).on("click", ".j-main-menu", function(e){
     resetModalNav()
     renderModalNav({
-      modalTitle: "Explore",
+      modalTitle: templates.linkBack,
       modalBody: templates.navCarousel({
-        aside: '',
+        parentData: {
+          description: 'desc here',
+          text: 'Explore'
+        },
         links: menuData
       }),
       bodyClass: `${modal_side_class} ${modal_nav_class}`
@@ -209,9 +214,9 @@ $(document).ready(function ($) {
     const thisLinkLevel = Number(`${$(this).data("my-menu")}`)
     clickedNavIndex.push(thisLinkLevel)
     renderModalNav({
-      modalTitle: `${$(this).text()}`,
+      modalTitle: templates.linkBack,
       modalBody: templates.navCarousel({
-        aside: menuData[thisLinkLevel].pageData.description,
+        parentData: menuData[thisLinkLevel].pageData,
         links: menuData[thisLinkLevel].children
       }),
       bodyClass: `modal-top`,
@@ -223,27 +228,17 @@ $(document).ready(function ($) {
   $(document).on("click", ".j-menu", function(e){
     e.preventDefault();
     const thisLinkLevel = Number(`${$(this).data("my-menu")}`)
-    // $(`${id_modal} .modal-title`).text(returnLastMenuData(menuData)[thisLinkLevel].pageData.text)
-    $(`${id_modal} .modal-title`).text(returnLastMenuData(menuData)[thisLinkLevel].pageData.text)
-    //console.log('211',returnLastMenuData(menuData)[thisLinkLevel].pageData.text)
-    const pTitle = returnLastMenuData(menuData)[thisLinkLevel].pageData.text
-    const pDescription = returnLastMenuData(menuData)[thisLinkLevel].pageData.description
+    const parentData = returnLastMenuData(menuData)[thisLinkLevel].pageData
     clickedNavIndex.push(thisLinkLevel)
     goToCarouselNavMenu({
       clickedIndex: thisLinkLevel,
-      parentTitle: pTitle,
-      parentDescription: pDescription
+      parentData: parentData
     })
-    //clickedNavIndex.push(thisLinkLevel)
-
-  });
+  })
 
   $(document).on("click", ".j-nav-back", function(e){
     $(nav_carousel_id).carousel(currentIndex-1)
-
-    //$(`${id_modal} .modal-title`).text(returnLastMenuData(menuData).pageData.text)
     clickedNavIndex.pop()
-    //$(`${id_modal} .modal-title`).text(returnLastMenuData(menuData).pageData.text)
   })
 
   $(id_modal).bind("hidden.bs.modal", function(e) {
@@ -256,13 +251,13 @@ $(document).ready(function ($) {
       $("body").addClass(classScrollActive) : $("body").removeClass(classScrollActive)
   }
 
-});
+})
 
 $(document).on("slid.bs.carousel",nav_carousel_id,function(e){
   currentIndex = $(nav_carousel_id + ' div.active').index()
   $(`${nav_carousel_id} .item-${currentIndex+1}`).remove()
   navCarouselActive()
-});
+})
 
 $(window).scroll(function () {
     if ($(window).scrollTop() > scroll_min) {
@@ -275,7 +270,7 @@ $(window).scroll(function () {
         $(classNavMain).removeClass("affix")
     }
     scroll_top = $(window).scrollTop()
-});
+})
 
 "use strict";
 
