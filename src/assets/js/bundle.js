@@ -172,8 +172,6 @@ function returnLastMenuData(data){
 // based on last clicked link index
 function goToCarouselNavMenu(data){
 
-  console.log(169,data)
-
   $(`${nav_carousel_id} .carousel-inner`).append(
     templates.navCarouselItem({
       carouselItemIndex: currentIndex+1,

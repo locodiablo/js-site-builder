@@ -3,13 +3,11 @@
   cursor: pointer;
   &.disabled{
     color: $black;
-    //.nav-item-link{
-      opacity: $opacity_disabled;
-      cursor: default;
-      &:hover{
-        background: transparent !important;
-      }
-    //}
+    opacity: $opacity_disabled;
+    cursor: default;
+    &:hover{
+      background: transparent !important;
+    }
   }
   .fas{
     margin-right: $spacer/2;
@@ -33,5 +31,15 @@
   }
   .carousel-item{
     border-bottom: solid 1px $clr-nav-item-border;
+  }
+}
+
+@include media-breakpoint-up(sm){
+  .modal-top{
+    .modal-title{
+      position: relative;
+      padding-left: $grid-gutter-width/2;
+      left: 50%;
+    }
   }
 }
