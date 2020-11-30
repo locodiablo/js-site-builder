@@ -151,14 +151,18 @@ function returnLastMenuData(data){
   return menuDataToUse
 }
 
-function goToCarouselNavMenu(incomingLinkLevel){
+function goToCarouselNavMenu(data){
 
   $(`${nav_carousel_id} .carousel-inner`).append(
     templates.navCarouselItem({
       carouselItemIndex: currentIndex+1,
+      // aside: templates.aside({
+      //   title: returnLastMenuData(menuData)[incomingLinkLevel].pageData.text,
+      //   description: returnLastMenuData(menuData)[incomingLinkLevel].pageData.description
+      // }),
       aside: templates.aside({
-        title: returnLastMenuData(menuData)[incomingLinkLevel].pageData.text,
-        description: returnLastMenuData(menuData)[incomingLinkLevel].pageData.description
+        title: data.parentTitle,
+        description: data.parentDescription
       }),
       links: returnLastMenuData(menuData).map((navItem,index) => {
         let linkData = {
@@ -207,10 +211,19 @@ $(document).ready(function ($) {
   $(document).on("click", ".j-menu", function(e){
     e.preventDefault();
     const thisLinkLevel = Number(`${$(this).data("my-menu")}`)
+    // $(`${id_modal} .modal-title`).text(returnLastMenuData(menuData)[thisLinkLevel].pageData.text)
     $(`${id_modal} .modal-title`).text(returnLastMenuData(menuData)[thisLinkLevel].pageData.text)
+    //console.log('211',returnLastMenuData(menuData)[thisLinkLevel].pageData.text)
+    const pTitle = returnLastMenuData(menuData)[thisLinkLevel].pageData.text
+    const pDescription = returnLastMenuData(menuData)[thisLinkLevel].pageData.description
     clickedNavIndex.push(thisLinkLevel)
+    goToCarouselNavMenu({
+      clickedIndex: thisLinkLevel,
+      parentTitle: pTitle,
+      parentDescription: pDescription
+    })
+    //clickedNavIndex.push(thisLinkLevel)
 
-    goToCarouselNavMenu(thisLinkLevel)
   });
 
   $(document).on("click", ".j-nav-back", function(e){
@@ -218,6 +231,7 @@ $(document).ready(function ($) {
 
     //$(`${id_modal} .modal-title`).text(returnLastMenuData(menuData).pageData.text)
     clickedNavIndex.pop()
+    //$(`${id_modal} .modal-title`).text(returnLastMenuData(menuData).pageData.text)
   })
 
   $(id_modal).bind("hidden.bs.modal", function(e) {
