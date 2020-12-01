@@ -16,9 +16,7 @@
         -moz-transition: -moz-transform .3s ease-out;
         -o-transition: -o-transform .3s ease-out;
         transition: transform .3s ease-out;
-        //transition: opacity .15s linear;
         transform: translate(0, -50px);
-        transform: none;
         height: auto;
         width: 100%;
         padding-bottom: $modal-top;
@@ -26,7 +24,6 @@
       }
     }
     &.show{
-      // transform: translate(0, -50px);
       .modal-dialog {
         transform: none;
         right: auto;
@@ -37,8 +34,6 @@
   .modal-dialog{
     right: 0;
     .modal-content{
-      // border-radius: 0;
-      // border: none;
       width: 100%;
       background: transparent;
 
