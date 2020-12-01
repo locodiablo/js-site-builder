@@ -2,10 +2,7 @@
 
 const id_modal = "#myModal"
 const id_cover_bg = ".jumbotron-cover"
-const id_top_nav_desc = "j-topNavDesc"
-const modal_side_class = "modal-side"
 const modal_nav_class = "modal-nav"
-const modal_demo_class = "modal-demo"
 const classScrollActive = 'scrollActive'
 const classNavBackDefaults = "nav-back"//nav-item nav-back disabled j-back
 const classNavMain = ".nav-main-wrapper"
@@ -58,14 +55,14 @@ const templates = {
     return `
     <div class="carousel-item item-${data.carouselItemIndex} ${data.carouselItemIndex == 0 ? 'active' : ''}">
         <div class="row align-items-center">
-          <div class="d-none d-sm-block col-sm-6 ${id_top_nav_desc}">
+          <div class="d-none d-sm-block col-sm-6">
             ${data.parentData.description}
           </div>
           <div class="col-12 col-sm-6">
             <div class="list-group ${classNavItem}">
               ${data.parentData.href ?
-                `<a class="list-group-item h3 m-0" href="${data.parentData.href}">${data.parentData.text}</a>`:
-                `<div class="list-group-item h3 m-0">${data.parentData.text}</div>`
+                `<a class="list-group-item nav-section-heading h3 m-0" href="${data.parentData.href}">${data.parentData.text}</a>`:
+                `<div class="list-group-item nav-section-heading h3 m-0">${data.parentData.text}</div>`
               }
               ${data.links}
             </div>
@@ -90,13 +87,6 @@ const templates = {
       <div class="nav-back disabled j-back" aria-label="back link">
           <i class="nav-fas btn-round btn-tint-dark fas fa-angle-left"></i> Back
       </div>
-  `,
-  linkBackORIGINAL: `
-    <div class="-list-group ${classNavItem}">
-      <div class="-list-group-item nav-back disabled j-back" aria-label="back link">
-          <i class="nav-fas btn-round btn-tint-dark fas fa-angle-left"></i> Back
-      </div>
-    </div>
   `,
   navCarousel: function(data){
     return `
@@ -184,12 +174,12 @@ $(document).ready(function ($) {
       modalTitle: templates.linkBack,
       modalBody: templates.navCarousel({
         parentData: {
-          description: 'desc here',
+          description: 'Start exploring!',
           text: 'Explore'
         },
         links: menuData
       }),
-      bodyClass: `${modal_side_class} ${modal_nav_class}`
+      bodyClass: modal_nav_class
     })
   })
 
@@ -205,7 +195,7 @@ $(document).ready(function ($) {
         parentData: menuData[thisLinkLevel].pageData,
         links: menuData[thisLinkLevel].children
       }),
-      bodyClass: `modal-top`,
+      bodyClass: modal_nav_class,
       navTabIndex: thisLinkLevel
     })
   })

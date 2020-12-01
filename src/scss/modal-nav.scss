@@ -1,3 +1,5 @@
+@import "./modal-side.scss";
+
 .nav-back{
   color: $primary;
   cursor: pointer;
@@ -17,25 +19,54 @@
   }
 }
 
-.nav_carousel{
-  .list-group{
-    .nav-list-group{
-      border-radius: 0;
-      border: none;
+.modal-nav{
+  .modal{
+    .modal-dialog{
+      max-width: none;
+      margin: 0 auto;
+      background: $modal-top-bg;
+      .modal-header {
+        border-radius: 0;
+      }
+
+      .modal-content {
+        border: 0;
+        border-radius: 0;
+
+
+        .modal-body{
+          padding: 0;
+
+          .nav_carousel{
+
+            .list-group{
+              .nav-list-group{
+                border-radius: 0;
+                border: none;
+              }
+            }
+            .list-group-item{
+              border-radius: 0;
+              border: none;
+              border-top: solid 1px $clr-nav-item-border;
+            }
+            .carousel-item{
+              border-bottom: solid 1px $clr-nav-item-border;
+            }
+
+            .nav-section-heading{
+              border: none;
+            }
+          }
+        }
+      }
     }
-  }
-  .list-group-item{
-    border-radius: 0;
-    border: none;
-    border-top: solid 1px $clr-nav-item-border;
-  }
-  .carousel-item{
-    border-bottom: solid 1px $clr-nav-item-border;
   }
 }
 
 @include media-breakpoint-up(sm){
-  .modal-top{
+  @import "./modal-top.scss";
+  .modal-nav{
     .modal-title{
       position: relative;
       padding-left: $grid-gutter-width/2;
