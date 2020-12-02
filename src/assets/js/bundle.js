@@ -63,6 +63,12 @@ function resetModalNav(){
 }
 
 const templates = {
+  navItemChildren: function(data){
+    return `
+      <span class="badge badge-primary">${data-1}</span>
+      <i class="nav-fas fas fa-angle-right d-none"></i>
+    `
+  },
   navCarouselItem: function(data){
     return `
     <div class="carousel-item item-${data.carouselItemIndex} ${data.carouselItemIndex == 0 ? 'active' : ''}">
@@ -87,9 +93,9 @@ const templates = {
       const navUrl = incomingLinkData.data.path.replace("src/js_build/page_definitions","")
       incomingLinkData.data.children.length > 1 ? incomingLinkData.exploreClass = 'j-menu ' : ''
       return `
-      <a class="list-group-item ${incomingLinkData.exploreClass} nav-dir list-group-item-${incomingLinkData.thisLinkCount}" data-my-menu="${incomingLinkData.thisLinkCount}" href="${navUrl}" data-href="${navUrl}">
+      <a class="list-group-item ${incomingLinkData.exploreClass} nav-dir list-group-item-${incomingLinkData.thisLinkCount}" data-my-menu="${incomingLinkData.thisLinkCount}" href="${navUrl}">
           ${incomingLinkData.data.pageData.text}
-          ${incomingLinkData.data.children.length > 1 ? '<i class="nav-fas fas fa-angle-right"></i>' : ''}
+          ${incomingLinkData.data.children.length > 1 ? templates.navItemChildren(incomingLinkData.data.children.length) : ''}
       </a>
       `
     },

@@ -1,3 +1,18 @@
-.breadcrumb{
-  border-bottom: dotted 1px #ccc;
+.breadcrumb-wrapper{
+  position: relative;
+
+  .breadcrumb{
+    display: block;
+    flex-wrap: nowrap;
+    border-bottom: dotted 1px #ccc;
+    background: transparent;
+    position: relative;
+    width: 100%;
+    white-space: nowrap;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    .breadcrumb-item{
+      display: inline-block;
+    }
+  }
 }
