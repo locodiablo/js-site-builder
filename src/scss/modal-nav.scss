@@ -55,6 +55,22 @@
             }
             .carousel-item{
               border-bottom: solid 1px $clr-nav-item-border;
+
+              .nav-section-description{
+                opacity: 0;
+                -webkit-transition: -webkit-transform .3s ease-out;
+                -moz-transition: -moz-transform .3s ease-out;
+                -o-transition: -o-transform .3s ease-out;
+                transition: transform .3s ease-out;
+                transform: translate(0, 2rem);
+              }
+              &.active{
+                .nav-section-description{
+                  transform: none;
+                  opacity: 1;
+                }
+
+              }
             }
 
             .nav-section-heading{

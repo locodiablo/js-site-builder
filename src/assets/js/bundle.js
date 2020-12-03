@@ -74,7 +74,9 @@ const templates = {
     <div class="carousel-item item-${data.carouselItemIndex} ${data.carouselItemIndex == 0 ? 'active' : ''}">
         <div class="row align-items-center">
           <div class="d-none d-sm-block col-sm-6">
-            ${data.parentData.description}
+            <div class="nav-section-description">
+              ${data.parentData.description}
+            </div>
           </div>
           <div class="col-12 col-sm-6">
             <div class="list-group ${classNavItem}">
