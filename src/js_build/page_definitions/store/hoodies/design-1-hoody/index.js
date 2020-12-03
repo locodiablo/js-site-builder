@@ -1,12 +1,12 @@
 const content = {
   config: {
     html_template: "template_page_banner",
-    nav_text: "All mine hoody",
+    nav_text: "Design 1 hoody",
     body_class: ""
   },
   head: {
-    title: "All mine hoody",
-    description: "All about the all mine hoody description Ut enim ad minim veniam"
+    title: "Design 1 hoody",
+    description: "All about the Design 1 hoody description Ut enim ad minim veniam"
   },
   body: [
     "Wow",
