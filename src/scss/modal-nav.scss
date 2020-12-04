@@ -83,6 +83,13 @@
   }
 }
 
+.nav-item{
+  &.nav-t-active{
+    border-bottom: solid $width-active-border $primary;
+    margin-bottom: -$width-active-border;
+  }
+}
+
 @include media-breakpoint-up(sm){
   @import "./modal-top.scss";
   .modal-nav{

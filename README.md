@@ -26,12 +26,13 @@ const page_content = {
         ]
 }
 ```
+2. Each new **page** config file should be added a **directory** with **js** file within, i.e: ```/my-ace-page-name/index.js```.
 
-2. Final output is served from the ```/public``` folder to localhost set in package file.
+3. Final output is served from the ```/public``` folder to localhost **port** set in the package file.
 
 ## Navigation
 - Navigation builds dynamically from ```index.js``` files in ```/src/js_build/page_definitions/```.
-- Web directory navigation based on a ```Bootstrap carousel``` rather than 'dropdowns'.
+- Web directory navigation is based on a ```Bootstrap carousel``` rather than 'dropdowns'.
 
 ## Carousels
 Mobile-friendly swipe sensitivity is set globally in ```/src/js_build/functions.js```
