@@ -26,7 +26,7 @@ const page_content = {
         ]
 }
 ```
-2. Each new **page** config file should be added a **directory** with **js** file within, i.e: ```/my-ace-page-name/index.js```.
+2. Each new **page** config file should be a **directory** with **js** file within, i.e: ```/my-ace-page-name/index.js```.
 
 3. Final output is served from the ```/public``` folder to localhost **port** set in the package file.
 
