@@ -63,6 +63,12 @@ function resetModalNav(){
 }
 
 const templates = {
+  navItem: function(data){
+    return `
+      <span class="badge badge-primary">${data-1}</span>
+      <i class="nav-fas fas fa-angle-right d-none"></i>
+    `
+  },
   navItemChildren: function(data){
     return `
       <span class="badge badge-primary">${data-1}</span>

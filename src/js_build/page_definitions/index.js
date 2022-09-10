@@ -3,15 +3,14 @@ const defaults = require("../defaults.js")
 const content = {
   config: {
     html_template: "template_page_home",
-    nav_text: "Questions",
-    body_class: "demo-questions"
+    nav_text: "Services",
+    body_class: "services"
   },
   head: {
     title: defaults.site_name_full,
-    description: `Welcome to the ${defaults.site_name_full} website: Start your insurance quote here!`
+    description: `Welcome to the ${defaults.site_name_full} website: Explore our services`
   },
   body: [
-    "questions here",
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   ],
   footer: []
