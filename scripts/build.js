@@ -9,7 +9,7 @@ const vars = require('../src/js_build/vars.js');
 //const pdf = require('html-pdf');
 
 // RETURN SRC FILES AS OBJECT
-const pageDefinitionsDir = dirTree(`./${paths.definitionsDir}`,{extensions:/\.js/});
+const pageDefinitionsDir = dirTree(`./${paths.definitionsDir}`,{extensions:/\.js/,attributes:['type','extension']});
 const imagesDirSrc = dirTree(`${paths.imagesDir}/gallery`,{extensions:/\.jpg/});
 
 const buildActions = {

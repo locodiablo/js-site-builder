@@ -3,7 +3,7 @@ const nav_main = require("../partials/nav_main");
 const footer = require("../partials/footer");
 const paths = require("../paths.js");
 const dirTree = require("directory-tree");
-let menuData = dirTree(`./${paths.definitionsDir}`, { extensions:/\.js/,exclude: /404.js/ }).children;
+let menuData = dirTree(`./${paths.definitionsDir}`, { extensions:/\.js/,exclude: /404.js/,attributes: ['type'] }).children;
 
 const navTreeSplit = {
   directory: function(data){

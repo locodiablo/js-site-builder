@@ -2,7 +2,7 @@ const vars = require("../vars.js");
 const paths = require("../paths.js");
 const nav_breadcrumb = require("../partials/nav_breadcrumb.js");
 const dirTree = require("directory-tree");
-const menuData = dirTree(`./${paths.definitionsDir}`, { extensions:/\.js/,exclude: /404.js/ }).children;
+const menuData = dirTree(`./${paths.definitionsDir}`, { extensions:/\.js/,exclude: /404.js/,attributes: ['type'] }).children;
 
 const navTreeSplit = {
   directory: function(data){
