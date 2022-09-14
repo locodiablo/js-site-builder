@@ -7,6 +7,7 @@ const leadingZero = function(data){
   data < 10 ? leader = "0" + data : leader = data
   return leader
 }
+
 const vars = {
   site_url: `www.${site_domain}`,
   site_name: "SiteNameHere",
@@ -17,7 +18,8 @@ const vars = {
   buildDate: `${leadingZero(today.getHours())}${leadingZero(today.getMinutes())}-${leadingZero(today.getDate())}${months[today.getMonth()].substring(0,3).toUpperCase()}${today.getFullYear()}`,
   date: {
     year: today.getFullYear()
-  }
+  },
+  css_class_nav_with_children: "j-t-menu"
 }
 
 module.exports = vars;

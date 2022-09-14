@@ -2,41 +2,72 @@ const vars = require("../vars.js");
 const paths = require("../paths.js");
 const nav_breadcrumb = require("../partials/nav_breadcrumb.js");
 const dirTree = require("directory-tree");
-const menuData = dirTree(`./${paths.definitionsDir}`, { extensions:/\.js/,exclude: /404.js/,attributes: ['type'] }).children;
+const menuData = require("../menu_data.js");
 
-const navTreeSplit = {
+// const navOutputSplitORIGINAL = {
+//   directory: function(incomingLinkData){
+//     const navUrl = incomingLinkData.data.path.replace(paths.definitionsDir,"")
+//     incomingLinkData.data.children.length > 1 ? incomingLinkData.exploreClass = vars.css_class_nav_with_children : ''
+//     return `
+//     <li class="nav-item nav-dir got-child nav-item-${incomingLinkData.thisLinkCount}">
+//       <a class="nav-link ${incomingLinkData.exploreClass}" data-my-menu="${incomingLinkData.thisLinkCount}" href="${navUrl}">
+//         ${incomingLinkData.data.pageData.text}
+//       </a>
+//       <ul>
+//       ${navOutputSplit[incomingLinkData.data.children]}
+//       </ul>
+//     </li>
+//     `
+//     incomingLinkData.children.map(dataChild =>{
+//       navOutputSplit[dataChild.type](dataChild)
+//     }).join("")
+//
+//   },
+//   file: function(incomingLinkData){
+//     //console.log(`file: ${incomingLinkData.data.path}`)
+//     return `
+//     <li class="no-child">
+//       <a href="">${incomingLinkData.data.name}</a>
+//     </li>`
+//   }
+// }
+
+const templates = {
   directory: function(data){
-    data.children.map(dataChild =>{
-      navTreeSplit[dataChild.type](dataChild)
-    }).join("")
-  },
-  file: function(data){
-    //console.log(`file: ${data.name}`)
-  }
-}
-
-const navOutputSplit = {
-  directory: function(incomingLinkData){
-    const navUrl = incomingLinkData.data.path.replace(paths.definitionsDir,"")
-    incomingLinkData.data.children.length > 1 ? incomingLinkData.exploreClass = 'j-t-menu ' : ''
     return `
-    <div class="nav-item nav-dir nav-item-${incomingLinkData.thisLinkCount}">
-      <a class="nav-link ${incomingLinkData.exploreClass}" data-my-menu="${incomingLinkData.thisLinkCount}" href="${navUrl}">
-        ${incomingLinkData.data.pageData.text}
-      </a>
-    </div>
+    <ul class="nav-item-children">
+      ${data.map(nav_item => {
+        console.log(`${nav_item.name} with children: ${nav_item.name}`);
+        return renderNavItem(nav_item)
+      }).join("")}
+    </ul>
     `
-    incomingLinkData.children.map(dataChild =>{
-      navOutputSplit[dataChild.type](dataChild)
-    }).join("")
-
-  },
-  file: function(incomingLinkData){
-    //console.log(`file: ${incomingLinkData.data.path}`)
   }
 }
 
-menuData.map((eachItem,index) => navTreeSplit[eachItem.type](eachItem)).join("")
+function renderNavItem(data){
+
+  const has_sub_menu = data.children ? 'kids' : 'no-kids'
+  return `
+  <li class="nav-item ${has_sub_menu}">
+    <a href="${data.path}">${data.name}</a>
+    ${data.children ? templates.directory(data.children) : ''}
+  </li>
+  `
+}
+
+function render_nav_items(data){
+  for (const nav_item in data) {
+    console.log('render nav items:',data[nav_item].name)
+    return renderNavItem(data[nav_item])
+  }
+}
+
+
+
+
+
+//menuData.map((eachItem,index) => navTreeSplit[eachItem.type](eachItem)).join("")
 
 function navbar(data,incomingMenuData){return `
   <nav class="navbar navbar-expand-sm bg-light">
@@ -53,13 +84,9 @@ function navbar(data,incomingMenuData){return `
           <li class="nav-item active">
             <a class="nav-link" href="${paths.urlHome}">Home <span class="sr-only">(current)</span></a>
           </li>
-          ${incomingMenuData.map((navItem,index) => {
-            let linkData = {
-              data: navItem,
-              thisLinkCount: index
-            }
-            return navOutputSplit[navItem.type](linkData)
-          }).join("")}
+          ${render_nav_items(menuData)}
+
+
         </ul>
 
       </div>
