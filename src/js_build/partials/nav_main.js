@@ -4,48 +4,31 @@ const nav_breadcrumb = require("../partials/nav_breadcrumb.js");
 const dirTree = require("directory-tree");
 const menuData = require("../menu_data.js");
 
-const templates = {
-  directory: function(data){
+const render = {
+  nav_sub_menu: function(data){
     return `
-    <ul class="nav-item-children">
+    <ul class="${vars.css_classes.nav.sub_menu}">
       ${data.map(nav_item => {
-        console.log(`${nav_item.name} dir with children: ${nav_item.name}`);
-        return renderNavItem(nav_item)
+        return render.nav_item(nav_item)
       }).join("")}
     </ul>
     `
-  }
-}
-
-function renderNavItem(data){
-
-  const has_sub_menu = data.children ? 'kids' : 'no-kids'
-  return `
-  <li class="nav-item ${has_sub_menu}">
-    <a href="${data.path}">${data.name}</a>
-    ${data.children ? templates.directory(data.children) : ''}
-  </li>
-  `
-}
-
-function render_nav_items(data){
-  // for (const nav_item in data) {
-  //   console.log('render nav items:',data[nav_item].name)
-  //   return renderNavItem(data[nav_item])
-  // }
-  console.log('item')
-
-
-  return data.map(nav_item => {
-    console.log(`${nav_item.name} with children: ${nav_item.name}`);
-    return renderNavItem(nav_item)
-  }).join("")
-}
-
-function render_nav_itemsWORKING(data){
-  for (const nav_item in data) {
-    console.log('render nav items:',data[nav_item].name)
-    return renderNavItem(data[nav_item])
+  },
+  nav_item: function(data){
+    const local_path = data.path.replace(paths.definitionsDir,"")
+    const require_path = data.type == "directory" ? `../page_definitions${local_path}/index.js` : `../page_definitions${local_path}`
+    const this_page_data = require(require_path);
+    return `
+    <li class="${vars.css_classes.nav.nav_item} ${data.children ? vars.css_classes.nav.has_sub_menu : 'no-kids'}">
+      <a href="${local_path}" class="${vars.css_classes.nav.nav_item_link}">${this_page_data.config.nav_text}</a>
+      ${data.children ? render.nav_sub_menu(data.children) : ''}
+    </li>
+    `
+  },
+  nav_items: function(data){
+    return data.map(nav_item => {
+      return render.nav_item(nav_item)
+    }).join("")
   }
 }
 
@@ -62,11 +45,9 @@ function navbar(data,incomingMenuData){return `
 
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="${paths.urlHome}">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item-link" href="${paths.urlHome}">Home <span class="sr-only">(current)</span></a>
           </li>
-          ${render_nav_items(menuData)}
-
-
+          ${render.nav_items(menuData)}
         </ul>
 
       </div>

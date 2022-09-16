@@ -6,3 +6,13 @@
     }
   }
 }
+
+.nav-item{
+  .nav-item-link{
+    display: flex;
+    min-height: 3rem;
+  }
+  .nav-item-submenu{
+    display: none;
+  }
+}

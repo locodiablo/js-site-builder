@@ -19,7 +19,15 @@ const vars = {
   date: {
     year: today.getFullYear()
   },
-  css_class_nav_with_children: "j-t-menu"
+  css_classes: {
+    nav: {
+      nav_item: "nav-item",
+      has_sub_menu: "nav-item-has-submenu",
+      nav_item_link: "nav-item-link",
+      sub_menu: "nav-item-submenu"
+
+    }
+  }
 }
 
 module.exports = vars;
