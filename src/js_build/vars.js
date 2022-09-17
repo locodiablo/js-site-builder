@@ -20,12 +20,14 @@ const vars = {
     year: today.getFullYear()
   },
   css_classes: {
+    containers: {
+      default: "container-xl"
+    },
     nav: {
       nav_item: "nav-item",
       has_sub_menu: "nav-item-has-submenu",
       nav_item_link: "nav-item-link",
       sub_menu: "nav-item-submenu"
-
     }
   }
 }

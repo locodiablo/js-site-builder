@@ -3,16 +3,14 @@
   "main": "server.js",
   "version": "0.0.1",
   "scripts": {
-    "build": "npm run clean && npm run build-sass && npm run js-build && node ./scripts/build",
+    "build": "npm run clean && npm run build-sass && npm run copy-js && node ./scripts/build",
+    "copy-js": "cpx './node_modules/@popperjs/**' src/assets/js/@popper",
     "serve": "serve public -p 5000",
     "build-sass": "sass --style=compressed --no-charset src/scss/style.scss src/assets/css/style.css",
-    "js-build": "concat -o ./src/assets/js/bundle.js ./src/assets/js/index.js",
-    "js-build-OLD": "concat -o ./src/assets/js/bundle.js ./src/assets/js/jquery.js ./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js ./src/assets/js/index.js",
     "clean": "rimraf public"
   },
   "dependencies": {
-    "bootstrap": "5.0.2",
-    "concat": "^1.0.3",
+    "bootstrap": "5.0.0",
     "cpx": "^1.5.0",
     "directory-tree": "^3.3.1",
     "file-system": "^2.2.2",

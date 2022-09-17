@@ -3,8 +3,8 @@ const vars = require("../vars.js")
 const content = {
   config: {
     html_template: "template_page_home",
-    nav_text: "Services",
-    body_class: "services"
+    nav_text: "Home",
+    body_class: "homepage"
   },
   head: {
     title: vars.site_name_full,
