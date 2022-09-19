@@ -19,8 +19,8 @@ const render = {
     const require_path = data.type == "directory" ? `../page_definitions${local_path}/index.js` : `../page_definitions${local_path}`
     const this_page_data = require(require_path);
     return `
-    <li class="${vars.css_classes.nav.nav_item} ${vars.css_classes.nav.nav_item}-${data.name.replace(".js","")} ${data.children ? vars.css_classes.nav.has_sub_menu : 'no-kids'}">
-      <a href="${local_path}" class="${vars.css_classes.nav.nav_item_link}">${this_page_data.config.nav_text}</a>
+    <li class="${vars.css_classes.nav.nav_item} ${vars.css_classes.nav.nav_item}-${data.name.replace(".js","")} ${data.children ? vars.css_classes.nav.has_sub_menu : 'no-kids'}" >
+      <a href="${local_path}" class="${vars.css_classes.nav.nav_item_link} ${data.children ? `js-trigger` :''}" ${data.children ? `data-js-function="nav_has_children"` :''}>${this_page_data.config.nav_text}</a>
       ${data.children ? render.nav_sub_menu(data.children) : ''}
     </li>
     `
@@ -43,10 +43,7 @@ function navbar(data,incomingMenuData){return `
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-item-link" href="${paths.urlHome}">Home <span class="sr-only">(current)</span></a>
-          </li>
+        <ul class="nav-items navbar-nav ml-auto" id="nav-main">
           ${render.nav_items(menuData)}
         </ul>
 

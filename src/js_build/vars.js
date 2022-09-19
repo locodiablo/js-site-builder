@@ -20,6 +20,7 @@ const vars = {
     year: today.getFullYear()
   },
   css_classes: {
+    js_trigger: "js-trigger",
     containers: {
       default: "container-xl"
     },
