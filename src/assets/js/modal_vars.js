@@ -2,7 +2,6 @@
 const modal_vars = {
   modal_nav_class: "modal-nav",
   modal_backdrop_active: false,
-  main_nav_active: false,
   id_modal: "theModal",
   id_body: "body",
   id_nav_main: "nav-main",

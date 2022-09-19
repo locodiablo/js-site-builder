@@ -1,6 +1,5 @@
 // index
 import { Modal } from './bootstrap.esm.min.js';
-//console.log('Modal',Modal)
 import { Carousel } from './bootstrap.esm.min.js';
 import { modal_vars } from "./modal_vars.js";
 import { templates } from "./templates.js";
@@ -20,7 +19,7 @@ document.addEventListener('click',function(e){
     e.target.hasAttribute("data-js-function") ?
     (
       e.preventDefault(),
-      console.log('attempt',e.target.getAttribute("data-js-function")),
+      //console.log('attempt',e.target.getAttribute("data-js-function")),
       functions[e.target.getAttribute("data-js-function")](e)
     ) : ''
   }
@@ -53,7 +52,6 @@ const actions = {
         modal_body.innerHTML = ""
         html_body.classList.remove(classBody)
         modal_vars.modal_backdrop_active = false
-        modal_vars.main_nav_active = false
         modal_vars.current_nav_carousel_index = 0
     },
     nav_carousel_back: {
@@ -66,7 +64,6 @@ const actions = {
         },
         false: function(){
             actions.nav_carousel_button_enable[modal_vars.current_nav_carousel_index > 0]()
-
         }
     },
     do_modal: function(data){
@@ -87,20 +84,20 @@ const actions = {
         modal_vars.nav_back_btn = document.getElementById(modal_vars.id_nav_back)
     },
     do_modal_nav: function(data){
+      // actions.modal_close()
+
       actions.do_modal(data)
       modal_vars.nav_back_btn = document.getElementById(modal_vars.id_nav_back)
-
       // listen for back click
       modal_vars.nav_back_btn.addEventListener('click', function (event) {
           actions.nav_carousel_back[modal_vars.current_nav_carousel_index > 0]()
       })
+
+      // modal_vars.main_nav_active = false
     },
     nav_carousel_next: function(data){
-      //console.log('nav_carousel_next modal_vars.current_nav_carousel_index',modal_vars.current_nav_carousel_index)
-      console.log('nav_carousel_next - modal_vars.current_nav_carousel_index',modal_vars.current_nav_carousel_index)
 
       modal_vars.current_nav_carousel_index ++
-
       let modal_nav_carousel = document.getElementById(modal_vars.id_nav_carousel)
 
       modal_vars.active_carousel_element = new Carousel(modal_nav_carousel,{
@@ -120,11 +117,11 @@ const actions = {
   }
 
 const functions = {
+
   // MAIN MENU
   nav_main: function(){
 
-    const main_nav = document.getElementById(modal_vars.id_nav_main).innerHTML
-    //console.log('main_nav',main_nav)
+    const main_nav_links = document.getElementById(modal_vars.id_nav_main).innerHTML
 
     actions.do_modal_nav({
       title: templates.modal_nav_back_link,
@@ -132,36 +129,31 @@ const functions = {
       backdrop: true,
       body: "main nav" + templates.modal_nav_carousel({
         left: "Explore site",
-        // right22: `<ul class="nav-item-submenu">${main_nav}</ul>`
-        right: templates.sub_menu(main_nav)
+        right: templates.sub_menu(main_nav_links)
       })
     })
-    modal_vars.main_nav_active = true
   },
   nav_has_children: function(e){
-    //console.log('nav has chldren')
+
     const parent_ele = e.target.closest('.nav-item-has-submenu')
     const parent_ele_submenu = parent_ele.querySelector('.nav-item-submenu').innerHTML
 
-    !modal_vars.main_nav_active ?
+    !document.querySelector("#body").classList.contains(modal_vars.modal_nav_class) ?
     (
-      console.log('modal_vars.main_nav_active',modal_vars.main_nav_active,'modal var carousel index',modal_vars.current_nav_carousel_index),
       actions.do_modal_nav({
         title: templates.modal_nav_back_link,
         classBody: modal_vars.modal_nav_class,
         backdrop: true,
         body: templates.modal_nav_carousel({
-          left: "stuff on the left",
+          left: "topnav stuff on the left",
           right: templates.sub_menu(parent_ele_submenu)
         })
       })
     ) :
     actions.nav_carousel_next({
       carousel_item_index: modal_vars.current_nav_carousel_index,
-      left: "hello" + modal_vars.current_nav_carousel_index,
+      left: "left stuff TRUE" + modal_vars.current_nav_carousel_index,
       right: templates.sub_menu(parent_ele_submenu)
     })
   }
 }
-
-// modal vars
