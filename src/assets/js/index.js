@@ -59,7 +59,7 @@ function nav_carousel_next(e){
 // GLOBAL LISTENER FOR CHILD MENU TRIGGERS
 document.addEventListener('click',function(e){
 
-  if(e.target && e.target.classList.contains('jam-js-trigger')){
+  if(e.target && e.target.classList.contains('js-trigger')){
     //
     e.preventDefault();
     const this_element = e.target

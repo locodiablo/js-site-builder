@@ -1,4 +1,5 @@
-const paths = require("../paths.js");
+const paths = require("../paths.js")
+const vars = require("../vars.js")
 
 const crumbs = {
   default: function(data){
@@ -23,7 +24,7 @@ function nav_breadcrumb(data){
   let url = "/";
   return `
   <div class="breadcrumb-container">
-    <nav class="breadcrumb-wrapper container p-0" aria-label="breadcrumb">
+    <nav class="breadcrumb-wrapper py-2 ${vars.css_classes.containers.default}" aria-label="breadcrumb">
       <ol class="breadcrumb">
         ${crumbs.default({
           url: paths.urlHome,

@@ -42,9 +42,21 @@ function navbar(data,incomingMenuData){return `
       </span>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <ul class="nav-items navbar-nav ml-auto" id="nav-main">
+        <ul class="nav-items navbar-nav ms-auto" id="nav-main">
           ${render.nav_items(menuData)}
+        </ul>
+
+        <ul class="navbar-nav navbar-selections navbar-expand">
+          <li class="nav-item">
+            <a href="#" class="nav-item-link">
+              Contact
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-item-link">
+              Search
+            </a>
+          </li>
         </ul>
 
       </div>
