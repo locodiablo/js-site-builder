@@ -2,7 +2,7 @@ import { modal_vars } from "./modal_vars.js";
 
 const templates = {
   sub_menu: function(data){
-    return `<ul class="nav-item-submenu">${data}</ul>`
+    return `<ul class="nav-items nav-item-submenu">${data}</ul>`
   },
   modal_nav_title: function(data){
     return `
@@ -11,7 +11,7 @@ const templates = {
   },
   modal_nav_back_link: `
       <button id="nav_back" class="nav-back disabled" aria-label="back link">
-          <i class=""> B </i> Back
+          <i class=""></i> Back
       </button>
   `,
   modal_nav_carousel_item_inner: function(data){

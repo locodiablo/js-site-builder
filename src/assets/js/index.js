@@ -4,25 +4,75 @@ import { Carousel } from './bootstrap.esm.min.js';
 import { modal_vars } from "./modal_vars.js";
 import { templates } from "./templates.js";
 
+let classBody = ""
 let modal_ele = document.getElementById(modal_vars.id_modal)
 const html_body = document.getElementById(`${modal_vars.id_body}`)
 const modal_title = document.getElementById(`${modal_vars.id_modal}-title`)
 const modal_body = document.getElementById(`${modal_vars.id_modal}-body`)
 const modal_footer = document.getElementById(`${modal_vars.id_modal}-footer`)
-let classBody = ""
+const nav_main_trigger = document.querySelector("#nav_mob")
 
-// GLOBAL LISTENER
+function open_top_nav(e){
+
+  //console.log('main nav ele clicked')
+  const parent_ele = e.target.closest('.nav-item-has-submenu')
+  const parent_ele_submenu = parent_ele.querySelector('.nav-item-submenu').innerHTML
+
+  modal_vars.current_nav_carousel_index = 0
+
+  actions.do_modal_nav({
+    title: templates.modal_nav_back_link,
+    classBody: modal_vars.modal_nav_class,
+    backdrop: true,
+    body: templates.modal_nav_carousel({
+      left: "topnav stuff on the left",
+      right: templates.sub_menu(parent_ele_submenu)
+    })
+  })
+}
+
+function nav_carousel_next(e){
+  //console.log('modal nav ele clicked')
+  const parent_ele = e.target.closest('.nav-item-has-submenu')
+  const parent_ele_submenu = parent_ele.querySelector('.nav-item-submenu').innerHTML
+
+  modal_vars.current_nav_carousel_index ++
+  let modal_nav_carousel = document.getElementById(modal_vars.id_nav_carousel)
+
+  modal_vars.active_carousel_element = new Carousel(modal_nav_carousel,{
+      interval: false,
+      wrap: false
+  })
+
+  let modal_nav_carousel_inner = document.querySelector(`#${modal_vars.id_nav_carousel_inner}`)
+  const new_carousel_item = document.createElement('div')
+  new_carousel_item.className = `carousel-item nav-carousel-item-${modal_vars.current_nav_carousel_index} item-${modal_vars.current_nav_carousel_index} ${modal_vars.current_nav_carousel_index == 0 ? 'active' : ''}`
+  new_carousel_item.id = `nav-carousel-item-${modal_vars.current_nav_carousel_index}`
+  new_carousel_item.innerHTML = templates.modal_nav_carousel_item_inner({
+    left: "left stuff carousel",
+    right: templates.sub_menu(parent_ele_submenu)
+  })
+  modal_nav_carousel_inner.appendChild(new_carousel_item)
+  modal_vars.active_carousel_element.to(modal_vars.current_nav_carousel_index)
+  actions.nav_carousel_button_enable[modal_vars.current_nav_carousel_index > 0]()
+}
+// GLOBAL LISTENER FOR CHILD MENU TRIGGERS
 document.addEventListener('click',function(e){
-  if(e.target && e.target.classList.contains('js-trigger')){
+
+  if(e.target && e.target.classList.contains('jam-js-trigger')){
     //
     e.preventDefault();
-    e.target.hasAttribute("data-js-function") ?
-    (
-      e.preventDefault(),
-      //console.log('attempt',e.target.getAttribute("data-js-function")),
-      functions[e.target.getAttribute("data-js-function")](e)
-    ) : ''
+    const this_element = e.target
+    this_element.closest(`#${modal_vars.id_nav_main}`) ?
+    open_top_nav(e) :
+    nav_carousel_next(e)
+
   }
+})
+
+nav_main_trigger.addEventListener("click", () => {
+  console.log("nav_main_trigger clicked.")
+  functions.nav_main()
 })
 
 // CLOSE MODAL
@@ -117,6 +167,21 @@ const actions = {
   }
 
 const functions = {
+
+  nav_top: function(data){
+    const parent_ele = e.target.closest('.nav-item-has-submenu')
+    const parent_ele_submenu = parent_ele.querySelector('.nav-item-submenu').innerHTML
+
+    actions.do_modal_nav({
+      title: templates.modal_nav_back_link,
+      classBody: modal_vars.modal_nav_class,
+      backdrop: true,
+      body: templates.modal_nav_carousel({
+        left: "topnav stuff on the left",
+        right: templates.sub_menu(parent_ele_submenu)
+      })
+    })
+  },
 
   // MAIN MENU
   nav_main: function(){

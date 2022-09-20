@@ -28,7 +28,7 @@ const vars = {
       nav_item: "nav-item",
       has_sub_menu: "nav-item-has-submenu",
       nav_item_link: "nav-item-link",
-      sub_menu: "nav-item-submenu"
+      sub_menu: "nav-item-submenu nav-items"
     }
   }
 }

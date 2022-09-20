@@ -11,7 +11,7 @@ function modal(data){return `
           </button>
         </div>
         <div id="theModal-body" class="modal-body"></div>
-        <div  id="theModal-footer" class="modal-footer">
+        <div id="theModal-footer" class="modal-footer">
         </div>
       </div>
     </div>

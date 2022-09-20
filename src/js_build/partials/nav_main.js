@@ -20,7 +20,7 @@ const render = {
     const this_page_data = require(require_path);
     return `
     <li class="${vars.css_classes.nav.nav_item} ${vars.css_classes.nav.nav_item}-${data.name.replace(".js","")} ${data.children ? vars.css_classes.nav.has_sub_menu : 'no-kids'}" >
-      <a href="${local_path}" class="${vars.css_classes.nav.nav_item_link} ${data.children ? `js-trigger` :''}" ${data.children ? `data-js-function="nav_has_children"` :''}>${this_page_data.config.nav_text}</a>
+      <a href="${local_path}" class="${vars.css_classes.nav.nav_item_link} ${data.children ? `js-trigger js-has-sub-menu` :''}" ${data.children ? `data-js-function="nav_has_children"` :''}>${this_page_data.config.nav_text}</a>
       ${data.children ? render.nav_sub_menu(data.children) : ''}
     </li>
     `
@@ -37,7 +37,7 @@ function navbar(data,incomingMenuData){return `
     <div class="${vars.css_classes.containers.default}">
       <a class="navbar-brand" href="${paths.urlHome}">${vars.site_name_full}</a>
 
-      <span class="navbar-toggler js-trigger" aria-controls="" aria-expanded="false" aria-label="Toggle navigation" data-js-function="nav_main">
+      <span id="nav_mob" class="navbar-toggler" aria-controls="" aria-expanded="false" aria-label="Toggle navigation" data-------js-function="nav_main">
         <span class="navbar-toggler-icon"></span>
       </span>
 
