@@ -9,8 +9,15 @@ const templates = {
     <h2>${data}</h2>
     `
   },
+  modal_left_content: function(data){
+    return `
+      <div class="nav-carousel-caption">
+        ${data}
+      </div>
+    `
+  },
   modal_nav_back_link: `
-      <button id="nav_back" class="nav-back disabled" aria-label="back link">
+      <button id="nav_back" class="nav-back disabled js-action" aria-label="back link">
           <i class=""></i> Back
       </button>
   `,

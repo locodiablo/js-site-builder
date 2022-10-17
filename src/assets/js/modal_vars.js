@@ -5,6 +5,9 @@ const modal_vars = {
   id_modal: "theModal",
   id_body: "body",
   id_nav_main: "nav-main",
+  id_nav_footer_contact: "nav-footer-contact",
+  id_nav_mobile: "nav-mob",
+  id_nav_contact: "nav-contact",
   id_contact_nav_trigger: "j-contact-menu",
   id_main_nav_search_trigger: "j-nav-search",
   //

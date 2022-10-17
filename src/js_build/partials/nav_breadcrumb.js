@@ -24,8 +24,8 @@ function nav_breadcrumb(data){
   let url = "/";
   return `
   <div class="breadcrumb-container">
-    <nav class="breadcrumb-wrapper py-2 ${vars.css_classes.containers.default}" aria-label="breadcrumb">
-      <ol class="breadcrumb">
+    <nav class="breadcrumb-wrapper ${vars.css_classes.containers.default}" aria-label="breadcrumb">
+      <ol class="breadcrumb py-2">
         ${crumbs.default({
           url: paths.urlHome,
           text: "Home"
