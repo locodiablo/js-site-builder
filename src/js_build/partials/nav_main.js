@@ -38,7 +38,7 @@ const render = {
 }
 
 function navbar(data,incomingMenuData){return `
-  <nav class="navbar navbar-expand-sm bg-light py-0">
+  <nav class="navbar navbar-expand-sm bg-light fixed-top py-0">
     <div class="${vars.css_classes.containers.default}">
       <a class="navbar-brand" href="${paths.urlHome}">${vars.site_name_full}</a>
 

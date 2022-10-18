@@ -16,17 +16,8 @@ function footer(data){return `
         <div class="col-12 col-md-8 col-lg-6" id="nav-footer-contact">
 
           <div class="row">
-            <div class="col-12 col-sm-6 col-md-4-col-lg-6">
 
-              <div class="mb-4">
-                <h3 class="mb-3 text-left fg-white">Address</h3>
-                <p>
-                ${vars.site_address_full.map(eachLine => `${eachLine}`).join("<br>")}
-                </p>
-              </div>
-
-            </div>
-            <div class="col-12 col-sm-6 col-md-8-col-lg-6">
+            <div class="col-12 order-sm-last col-sm-6 col-md-8-col-lg-6">
 
               <p>
                 09:00 - 18:00 <span class="ml-2 fg-olive">Open now</span>
@@ -54,6 +45,17 @@ function footer(data){return `
                 <span class="site-icon icon-envelope fg-white mr-2"></span>
                 info@the-site.com
               </a>
+
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4-col-lg-6">
+
+              <div class="mb-4">
+                <h3 class="mb-3 text-left fg-white">Address</h3>
+                <p>
+                ${vars.site_address_full.map(eachLine => `${eachLine}`).join("<br>")}
+                </p>
+              </div>
 
             </div>
           </div>

@@ -38,7 +38,7 @@ const nav_actions = {
       classBody: modal_vars.modal_nav_class,
       backdrop: true,
       body: `
-        <div class='container'>
+        <div class='container py-4'>
           ${main_contact_links}
         </div>`
     })
