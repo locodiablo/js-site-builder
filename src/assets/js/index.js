@@ -144,7 +144,8 @@ const actions = {
           modal_vars.active_carousel_element.to(modal_vars.current_nav_carousel_index)
           const item_to_destroy = document.getElementById(`nav-carousel-item-${modal_vars.current_nav_carousel_index+1}`)
           item_to_destroy.remove()
-          actions.nav_carousel_button_enable[modal_vars.current_nav_carousel_index > 0]()
+          actions.nav_carousel_button_enable[modal_vars.current_nav_carousel_index > 0]();
+
       },
       false: function(){
           actions.nav_carousel_button_enable[modal_vars.current_nav_carousel_index > 0]()
