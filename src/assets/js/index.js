@@ -39,10 +39,7 @@ const nav_actions = {
       backdrop: true,
       body: `
         <div class='container'>
-          ${templates.modal_nav_carousel_item_inner({
-            left: "contact left",
-            right: main_contact_links
-          })}
+          ${main_contact_links}
         </div>`
     })
   },

@@ -14,6 +14,7 @@ const vars = {
   site_name: "SiteNameHere",
   site_name_full: "SiteNameHere Ltd",
   site_email: `simon@${site_domain}`,
+  site_tel: "0123 456 789",
   site_domain: site_domain,
   site_address_full: [
     "Address line 1",
@@ -21,7 +22,12 @@ const vars = {
     "County",
     site_address_postcode
   ],
-  site_cv_caption: "Web and brand creative",
+  site_socials: [
+    {
+      type: "facebook",
+      url: "http://www.facebook.com/rosspackardpaint/"
+    }
+  ],
   buildDate: `${leadingZero(today.getHours())}${leadingZero(today.getMinutes())}-${leadingZero(today.getDate())}${months[today.getMonth()].substring(0,3).toUpperCase()}${today.getFullYear()}`,
   date: {
     year: today.getFullYear()

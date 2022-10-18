@@ -3,7 +3,7 @@ const templateMaster = require("./template_page_master")
 //
 function template(data){
   data.body = `
-    <div class="jumbotron">
+    <div class="banner">
       <div class="${vars.css_classes.containers.default}">
         <h1><a href="${data.pageContentUrl}">${data.head.title}</a></h1>
         <p>${data.head.description}</p>
