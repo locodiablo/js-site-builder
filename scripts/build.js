@@ -6,7 +6,6 @@ const bootstrapRoot = './node_modules/bootstrap/js/src';
 const paths = require('../src/js_build/paths.js');
 const vars = require('../src/js_build/vars.js');
 //
-//const pdf = require('html-pdf');
 
 // RETURN SRC FILES AS OBJECT
 const pageDefinitionsDir = dirTree(`./${paths.definitionsDir}`,{extensions:/\.js/,attributes:['type','extension']});

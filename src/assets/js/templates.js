@@ -17,7 +17,7 @@ const templates = {
     `
   },
   modal_nav_back_link: `
-      <button id="nav_back" class="nav-back disabled" aria-label="back link">
+      <button id="nav_back" class="${modal_vars.css_class_nav_back_disabled}" aria-label="back link">
           <i class=""></i> Back
       </button>
   `,

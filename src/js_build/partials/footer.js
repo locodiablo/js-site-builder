@@ -19,10 +19,6 @@ function footer(data){return `
 
             <div class="col-12 order-sm-last col-sm-6 col-md-8-col-lg-6">
 
-              <p>
-                09:00 - 18:00 <span class="ml-2 fg-olive">Open now</span>
-              </p>
-
               <div class="row my-4">
 
                 <div class="col col-6">
@@ -45,6 +41,10 @@ function footer(data){return `
                 <span class="site-icon icon-envelope fg-white mr-2"></span>
                 info@the-site.com
               </a>
+
+              <p>Mon - Fri: 08:30 - 17:00</p>
+              <p>​​Sat: 08:30 - 11:30</p>
+              <p>Sun: Closed</p>
 
             </div>
 

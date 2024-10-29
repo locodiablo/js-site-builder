@@ -1,3 +1,4 @@
+const id_nav_back_trigger = "j-nav-back"
 
 const modal_vars = {
   modal_nav_class: "modal-nav",
@@ -17,7 +18,9 @@ const modal_vars = {
   current_nav_carousel_index: 0,
   //
   id_nav_back: "nav_back",
-  id_nav_back_trigger: "j-nav-back",
+  id_nav_back_trigger: id_nav_back_trigger,
+  css_class_nav_back_disabled: "nav-back btn btn-light disabled",
+  css_class_nav_back_enabled: `nav-back btn btn-light ${id_nav_back_trigger}`,
   nav_back_btn: ""
 }
 

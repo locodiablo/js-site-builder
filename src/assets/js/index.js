@@ -3,6 +3,8 @@ import { Modal } from './bootstrap.esm.min.js';
 import { Carousel } from './bootstrap.esm.min.js';
 import { modal_vars } from "./modal_vars.js";
 import { templates } from "./templates.js";
+import site_config from "./site-config.json" with { type: "json" };
+console.log(site_config.modal.nav.back.id)
 
 let classBody = ""
 let modal_ele = document.getElementById(modal_vars.id_modal)
@@ -120,12 +122,12 @@ const actions = {
   // Carousel can go back
      true: function(){
          console.log('enable back button')
-         modal_vars.nav_back_btn.className = "nav-back j-nav-back"
+         modal_vars.nav_back_btn.className = modal_vars.css_class_nav_back_enabled
      },
      // NO carousel back
      false: function(){
          console.log('disable back button ')
-         modal_vars.nav_back_btn.className = "nav-back disabled"
+            modal_vars.nav_back_btn.className = modal_vars.css_class_nav_back_disabled
      }
   },
   return_sub_menu_links: function(data){
@@ -153,6 +155,7 @@ const actions = {
   },
   do_modal: function(data){
 
+      html_body.removeAttribute("style")
       classBody = data.classBody;
       html_body.classList.add(classBody)
 
